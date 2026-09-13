@@ -1,0 +1,14 @@
+name: Keep Website Alive
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Ping website
+        run: curl -L --fail --silent --show-error ""

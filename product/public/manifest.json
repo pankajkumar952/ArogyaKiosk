@@ -1,0 +1,34 @@
+{
+  "name": "ArogyaKiosk — AI Health Kiosk",
+  "short_name": "ArogyaKiosk",
+  "description": "AI-powered multilingual clinical history kiosk for Indian hospitals",
+  "start_url": "/",
+  "display": "fullscreen",
+  "background_color": "#f0fdfa",
+  "theme_color": "#0d9488",
+  "orientation": "portrait",
+  "categories": ["medical", "health"],
+  "lang": "hi",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Doctor Dashboard",
+      "short_name": "Doctor",
+      "url": "/doctor",
+      "icons": [{ "src": "/logo.png", "sizes": "96x96" }]
+    }
+  ]
+}

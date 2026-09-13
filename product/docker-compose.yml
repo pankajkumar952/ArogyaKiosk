@@ -1,0 +1,50 @@
+version: "3.9"
+# MediKiosk — Docker Compose for local self-hosting.
+# Production deployment is Cloudflare Pages (see .ai/CLOUDFLARE_ENV.md).
+# Redis removed — the app does NOT use Redis. All persistence is via Neon Postgres.
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      # ── Required ───────────────────────────────────────────────
+      - DATABASE_URL=${DATABASE_URL}                             # Neon Postgres connection string
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}                       # min 32-char random string
+      - DOCTOR_PIN=${DOCTOR_PIN}                                 # 6+ digit PIN for doctor dashboard
+      # ── Bhashini TTS/ASR (optional — voice features degrade gracefully)
+      - BHASHINI_USER_ID=${BHASHINI_USER_ID:-}
+      - BHASHINI_API_KEY=${BHASHINI_API_KEY:-}
+      # ── Twilio SMS (optional — 0000 bypass works in dev/demo)
+      - TWILIO_ACCOUNT_SID=${TWILIO_ACCOUNT_SID:-}
+      - TWILIO_AUTH_TOKEN=${TWILIO_AUTH_TOKEN:-}
+      - TWILIO_PHONE_NUMBER=${TWILIO_PHONE_NUMBER:-}
+      # ── ABDM (optional — mock adapter used when not set)
+      - ABDM_CLIENT_ID=${ABDM_CLIENT_ID:-}
+      - ABDM_CLIENT_SECRET=${ABDM_CLIENT_SECRET:-}
+      - ABDM_BASE_URL=${ABDM_BASE_URL:-https://dev.abdm.gov.in}
+      - ABDM_ENV=${ABDM_ENV:-dev}
+      - ABDM_FACILITY_ID=${ABDM_FACILITY_ID:-}
+      # ── App public URL — used for ABDM callbacks and OG tags
+     
+      # ── RAG ingest protection
+      - INGEST_SECRET=${INGEST_SECRET:-}
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+    networks:
+      - medikiosk
+
+networks:
+  medikiosk:
+    driver: bridge
+

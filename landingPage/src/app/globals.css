@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-font-smoothing: antialiased; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+
+/* Page container */
+.page-container { max-width: 1080px; margin: 0 auto; padding: 0 40px; width: 100%; }
+.hero-container  { max-width: 1600px; margin: 0 auto; padding: 0 40px; width: 100%; }
+
+/* ── Buttons — Teal/Green default, Emerald hover ─────── */
+.btn-login {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 11px 24px; border-radius: 9999px;
+  border: 2px solid #0d9488; background: transparent; color: #0d9488;
+  font-family: inherit; font-weight: 700; font-size: 15px;
+  cursor: pointer; text-decoration: none; white-space: nowrap;
+  transition: background 0.22s ease, color 0.22s ease, border-color 0.22s ease, transform 0.15s ease;
+}
+.btn-login:hover { background: #059669; border-color: #059669; color: #fff; transform: scale(1.02); }
+.btn-login-white { border-color: rgba(255,255,255,0.8); color: #fff; }
+.btn-login-white:hover { background: #059669; border-color: #059669; }
+
+.btn-download {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 11px 24px; border-radius: 9999px;
+  border: 2px solid #0d9488; background: #0d9488; color: #fff;
+  font-family: inherit; font-weight: 700; font-size: 15px;
+  cursor: pointer; text-decoration: none; white-space: nowrap;
+  transition: background 0.22s ease, border-color 0.22s ease, transform 0.15s ease;
+}
+.btn-download:hover { background: #059669; border-color: #059669; transform: scale(1.02); }
+.btn-login-lg  { padding: 14px 34px; font-size: 17px; }
+.btn-download-lg { padding: 14px 34px; font-size: 17px; }
+
+/* ── Hero overlay ──────────────────────────────────────────────── */
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, rgba(2,44,34,0.82) 0%, rgba(6,95,70,0.6) 38%, rgba(0,0,0,0.2) 65%, transparent 100%);
+}
+
+/* ── Layout helpers ──────────────────────────────────────────── */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+.four-col { display: grid; grid-template-columns: repeat(4,1fr); gap: 40px; }
+
+.hide-mobile { display: flex; }
+.show-mobile { display: none !important; }
+
+@media (max-width: 900px) {
+  .two-col { grid-template-columns: 1fr; gap: 40px; }
+  .four-col { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .order-flip { order: 0 !important; }
+  .page-container { padding: 0 24px; }
+  .hero-container { padding: 0 16px; }
+  .hero-text-wrap { padding: 40px 24px 48px !important; max-width: 100% !important; }
+  .hide-mobile { display: none !important; }
+  .show-mobile { display: flex !important; }
+}
+
+/* ── Watermark ──────────────────────────────────────────────── */
+.watermark {
+  position: fixed;
+  bottom: 14px;
+  right: 18px;
+  font-family: 'Poppins', system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(13,148,136,0.55);
+  letter-spacing: 0.04em;
+  pointer-events: none;
+  z-index: 9999;
+  user-select: none;
+}
