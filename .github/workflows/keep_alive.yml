@@ -11,4 +11,4 @@ jobs:
 
     steps:
       - name: Ping website
-        run: curl -L --fail --silent --show-error ""
+        run: curl -L --fail --silent --show-error "https://arogyalanding-5xnto6r7w-pankaj-20b2.vercel.app/"
